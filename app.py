@@ -1,4 +1,3 @@
-<<<<<<< HEAD
 import os
 
 # If we are in the cloud, use the cloud URL. If on your laptop, use localhost.
@@ -149,7 +148,7 @@ if st.session_state.messages and st.session_state.messages[-1]["role"] == "user"
                     placeholder.error(f"SYS_ERR: {response.status_code}")
                     
             except Exception:
-=======
+                
 import os
 
 # If we are in the cloud, use the cloud URL. If on your laptop, use localhost.
@@ -300,5 +299,5 @@ if st.session_state.messages and st.session_state.messages[-1]["role"] == "user"
                     placeholder.error(f"SYS_ERR: {response.status_code}")
                     
             except Exception:
->>>>>>> 9b195144be5d92762f53a2d94cb749a83a4b9079
+
                 placeholder.error("SYS_CRITICAL: Connection to Vault Lost.")
