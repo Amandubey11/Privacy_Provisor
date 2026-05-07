@@ -148,7 +148,9 @@ if st.session_state.messages and st.session_state.messages[-1]["role"] == "user"
                     placeholder.error(f"SYS_ERR: {response.status_code}")
                     
             except Exception:
-                
+                placeholder.error("Connection Error. Is the backend running?")
+
+
 import os
 
 # If we are in the cloud, use the cloud URL. If on your laptop, use localhost.
