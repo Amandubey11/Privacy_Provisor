@@ -2,7 +2,7 @@
 
 **A secure middleware architecture designed to intercept, anonymize, and manage Personally Identifiable Information (PII) within AI-driven workflows.**
 
-[![Streamlit App](https://static.streamlit.io/badges/streamlit_badge_svg.svg)](YOUR_STREAMLIT_LINK_HERE)
+[![Streamlit App](https://static.streamlit.io/badges/streamlit_badge_svg.svg)](https://amandubey11-privacy-provisor-app-tbb8su.streamlit.app/)
 [![License: MIT](https://img.shields.io/badge/License-MIT-yellow.svg)](https://opensource.org/licenses/MIT)
 
 ## 📌 Overview
