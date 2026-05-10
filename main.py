@@ -2,6 +2,7 @@
 # main.py - PHASE 2: SQLite Database Integration
 from fastapi import FastAPI
 from pydantic import BaseModel
+from presidio_analyzer.nlp_engine import NlpEngineProvider
 from presidio_analyzer import AnalyzerEngine, PatternRecognizer, Pattern
 from presidio_anonymizer import AnonymizerEngine
 import google.generativeai as genai
@@ -34,15 +35,24 @@ model = get_chat_model()
 class PrivacyVault:
     def __init__(self):
         print("Initializing Engine & Database...")
-        self.analyzer = AnalyzerEngine()
+        
+        # 1. Force Presidio to use the Small (Low-RAM) model
+        configuration = {
+            "nlp_engine_name": "spacy",
+            "models": [{"lang_code": "en", "model_name": "en_core_web_sm"}],
+        }
+        provider = NlpEngineProvider(nlp_configuration=configuration)
+        nlp_engine = provider.create_engine()
+        
+        # 2. Boot up the Analyzer with the new engine
+        self.analyzer = AnalyzerEngine(nlp_engine=nlp_engine, supported_languages=["en"])
         self.anonymizer = AnonymizerEngine()
         self.entity_counters = {}
 
-        # Connect to SQLite (This creates 'vault_memory.db' in your folder)
+        # Connect to SQLite
         self.conn = sqlite3.connect('vault_memory.db', check_same_thread=False)
         self.cursor = self.conn.cursor()
         
-        # Create the database table if it doesn't exist
         self.cursor.execute('''
             CREATE TABLE IF NOT EXISTS token_map (
                 token TEXT PRIMARY KEY,
